@@ -12,3 +12,7 @@ class Post(models.Model):
 
     def __str__(self):
         return f'[{self.pk}]{self.title}'
+
+    # 목록에서 각각의 페이지로 들어가는 링크 자동 생성
+    def get_absolute_url(self):
+        return f'/blog/{self.pk}/'

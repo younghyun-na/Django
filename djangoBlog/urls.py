@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
+    path('', include('single_pages.urls'))  # 나머지 url 패턴을 single_pages로 넘기기
 ]
