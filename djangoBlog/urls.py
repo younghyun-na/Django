@@ -16,8 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+# 앞으로 관리할 라우터 목록
 urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('', include('single_pages.urls'))  # 나머지 url 패턴을 single_pages로 넘기기
 ]
+
+# MEDIA_URL 을 MEDIA_ROOT과 연결
+# static: 어디서 접근하던 이 경로를 사용한다는 의미
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
