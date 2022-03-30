@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 
 # Create your models here.
@@ -19,3 +21,6 @@ class Post(models.Model):
     # 목록에서 각각의 페이지로 들어가는 링크 자동 생성
     def get_absolute_url(self):
         return f'/blog/{self.pk}/'
+
+    def get_file_name(self):
+        return os.path.basename(self.file_upload.name)
