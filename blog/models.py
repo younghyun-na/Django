@@ -1,10 +1,12 @@
 import os
 
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=30)
+    hook_msg = models.TextField(blank=True)
     content = models.TextField()
 
     head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
@@ -13,14 +15,13 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # author: 추후 작성 예정
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f'[{self.pk}]{self.title}'
+        return f'[{self.pk}]{self.title} : {self.author}'
 
-    # 목록에서 각각의 페이지로 들어가는 링크 자동 생성
     def get_absolute_url(self):
         return f'/blog/{self.pk}/'
 
     def get_file_name(self):
-        return os.path.basename(self.file_upload.name)
+        return os.path.basename(self.attached_file.name)
