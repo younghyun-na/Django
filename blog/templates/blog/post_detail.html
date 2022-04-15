@@ -37,6 +37,16 @@
             {{ post.get_file_name }}  <!--함수 여도 () X>
         {% endif %}
         <hr>
+            {% if p.tags.exists %}
+            <br />
+            <i class = "fas fa-tags"></i>
+            {% for tag in p.tags.iterator %}
+                <a href = {{ tag.get_absolute_url }}>{{ tag }} </a>
+                {% endfor %}
+                <br />
+                <br />
+            {% endif %}
+        <hr>
 
         <!-- Comments Form -->
         <div class="card my-4">
